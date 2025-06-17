@@ -299,9 +299,12 @@ show_last_used() {
     fi
 }
 
-# Save tool to history
+# Save tool to history with category
 save_to_history() {
-    echo "$1" >>"$CONFIG_FILE"
+    local tool_name="$1"
+    local tool_category="$2"
+    local timestamp=$(date +"%Y-%m-%d %H:%M:%S")
+    echo "[$timestamp] [$tool_category] $tool_name" >> "$CONFIG_FILE"
 }
 
 # Main function
@@ -390,7 +393,7 @@ main() {
             done
 
             # Save to history
-            save_to_history "$selected_tool"
+            save_to_history "$selected_tool" "$category"
 
             echo -e "${GREEN}✅ Tool information displayed.${RESET}\n"
 
