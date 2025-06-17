@@ -29,7 +29,7 @@ A collection of useful shell scripts for various tasks. These scripts can be eas
 - `fwatch` - File watcher script (available on GitHub: https://github.com/kuro-jojo/file-organizer)
 - `pat` - Copy file contents to clipboard using xclip or xsel
 - `swap` - Reallocate the swap file
-- `toolfinder` - Find and display information about tools
+- `toolfinder` - Find and display information about tools ![img](img/toolfinder.png)
 
 ### Custom Script List
 

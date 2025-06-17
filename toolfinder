@@ -34,31 +34,223 @@ INFO="ℹ️"
 CLOCK="⏰"
 BYE="👋"
 
-# Tool database
+# Tool database with detailed descriptions and examples
 declare -A TOOLS=(
     # Process Monitoring
-    ["htop"]="Interactive process viewer (an improved top)"
-    ["glances"]="Cross-platform system monitoring tool"
-    ["btop"]="Modern, feature-rich process monitor"
-    ["nmon"]="AIX & Linux performance monitoring"
+    
+    ["htop"]="Interactive process viewer (an improved top)\n\n${BOLD}Installation:${RESET} sudo apt install htop\n${BOLD}Basic Usage:${RESET} htop\n${BOLD}Examples:\n${RESET}  - View processes sorted by CPU: ${GREEN}htop -s PERCENT_CPU${RESET}\n  - Tree view: ${GREEN}htop -t${RESET}"
+    
+    ["gotop"]="Terminal-based process viewer\n\n${BOLD}Installation:${RESET} sudo apt install gotop\n${BOLD}Basic Usage:${RESET} gotop\n${BOLD}Examples:\n${RESET}  - Start with CPU: ${GREEN}gotop -c cpu${RESET}\n  - Start with memory: ${GREEN}gotop -c mem${RESET}\n  - Start with network: ${GREEN}gotop -c net${RESET}\n  - Start with disk: ${GREEN}gotop -c disk${RESET}\n  - Start with processes: ${GREEN}gotop -c proc${RESET}"
+    
+    ["bashtop"]="Terminal process viewer\n\n${BOLD}Installation:${RESET} sudo apt install bashtop\n${BOLD}Basic Usage:${RESET} bashtop\n${BOLD}Examples:\n${RESET}  - Show CPU: ${GREEN}bashtop -c${RESET}\n  - Show memory: ${GREEN}bashtop -m${RESET}\n  - Show network: ${GREEN}bashtop -n${RESET}\n  - Show disk: ${GREEN}bashtop -d${RESET}\n  - Show processes: ${GREEN}bashtop -p${RESET}"
+    
+    ["atop"]="Process monitoring tool\n\n${BOLD}Installation:${RESET} sudo apt install atop\n${BOLD}Basic Usage:${RESET} atop\n${BOLD}Examples:\n${RESET}  - View processes: ${GREEN}atop${RESET}\n  - View CPU: ${GREEN}atop -c${RESET}\n  - View memory: ${GREEN}atop -m${RESET}\n  - View network: ${GREEN}atop -n${RESET}\n  - View disk: ${GREEN}atop -d${RESET}"
+    
+    ["iotop"]="I/O monitoring\n\n${BOLD}Installation:${RESET} sudo apt install iotop\n${BOLD}Basic Usage:${RESET} sudo iotop\n${BOLD}Examples:\n${RESET}  - View I/O: ${GREEN}sudo iotop${RESET}\n  - View only processes: ${GREEN}sudo iotop -p${RESET}\n  - View only I/O: ${GREEN}sudo iotop -o${RESET}\n  - View only I/O per process: ${GREEN}sudo iotop -P${RESET}\n  - View only I/O per device: ${GREEN}sudo iotop -D${RESET}"
+    
+    ["nmon"]="AIX & Linux performance monitoring\n\n${BOLD}Installation:${RESET} sudo apt install nmon\n${BOLD}Basic Usage:${RESET} nmon\n${BOLD}Examples:\n${RESET}  - CPU and memory: ${GREEN}nmon -f -s 60 -c 60 -t -m ./${RESET}\n  - Disk I/O: ${GREEN}nmon -d${RESET}"
+    
+    ["powertop"]="Power consumption monitoring\n\n${BOLD}Installation:${RESET} sudo apt install powertop\n${BOLD}Basic Usage:${RESET} sudo powertop\n${BOLD}Examples:\n${RESET}  - View power usage: ${GREEN}sudo powertop${RESET}\n  - View battery: ${GREEN}sudo powertop --battery${RESET}\n  - View idle stats: ${GREEN}sudo powertop --idle${RESET}\n  - View device stats: ${GREEN}sudo powertop --device${RESET}\n  - View process stats: ${GREEN}sudo powertop --process${RESET}"
+    
+    ["htop-vim"]="Vim-like process viewer\n\n${BOLD}Installation:${RESET} sudo apt install htop-vim\n${BOLD}Basic Usage:${RESET} htop-vim\n${BOLD}Examples:\n${RESET}  - View processes: ${GREEN}htop-vim${RESET}\n  - View CPU: ${GREEN}htop-vim -c${RESET}\n  - View memory: ${GREEN}htop-vim -m${RESET}\n  - View network: ${GREEN}htop-vim -n${RESET}\n  - View disk: ${GREEN}htop-vim -d${RESET}"
+    
+    ["glances"]="Cross-platform system monitoring tool\n\n${BOLD}Installation:${RESET} pip install glances\n${BOLD}Basic Usage:${RESET} glances\n${BOLD}Examples:\n${RESET}  - Web server mode: ${GREEN}glances -w${RESET}\n  - Monitor remote host: ${GREEN}glances -s -B 0.0.0.0${RESET}"
+    
+    ["btop"]="Modern, feature-rich process monitor\n\n${BOLD}Installation:${RESET} sudo apt install btop\n${BOLD}Basic Usage:${RESET} btop\n${BOLD}Examples:\n${RESET}  - Show processes: ${GREEN}btop${RESET}\n  - Show CPU: ${GREEN}btop -c${RESET}\n  - Show memory: ${GREEN}btop -m${RESET}\n  - Show network: ${GREEN}btop -n${RESET}\n  - Show disk: ${GREEN}btop -d${RESET}"
+    
+    ["nmon"]="AIX & Linux performance monitoring\n\n${BOLD}Installation:${RESET} sudo apt install nmon\n${BOLD}Basic Usage:${RESET} nmon\n${BOLD}Examples:\n${RESET}  - CPU and memory: ${GREEN}nmon -f -s 60 -c 60 -t -m ./${RESET}\n  - Disk I/O: ${GREEN}nmon -d${RESET}"
 
     # Performance Monitoring
-    ["htop"]="Interactive process viewer"
-    ["iostat"]="CPU and I/O statistics"
-    ["vmstat"]="System performance monitoring"
-    ["dstat"]="Versatile resource statistics"
+    
+    ["iostat"]="CPU and I/O statistics\n\n${BOLD}Installation:${RESET} sudo apt install sysstat\n${BOLD}Basic Usage:${RESET} iostat\n${BOLD}Examples:\n${RESET}  - Extended stats every 2s: ${GREEN}iostat -x 2${RESET}\n  - Show device utilization: ${GREEN}iostat -d -k 2${RESET}"
+    
+    ["vmstat"]="System performance monitoring\n\n${BOLD}Installation:${RESET} sudo apt install procps\n${BOLD}Basic Usage:${RESET} vmstat\n${BOLD}Examples:\n${RESET}  - Update every 2s: ${GREEN}vmstat 2${RESET}\n  - Show disk stats: ${GREEN}vmstat -d${RESET}"
+    
+    ["dstat"]="Versatile resource statistics\n\n${BOLD}Installation:${RESET} sudo apt install dstat\n${BOLD}Basic Usage:${RESET} dstat\n${BOLD}Examples:\n${RESET}  - CPU and disk: ${GREEN}dstat -cdl -D sda\n  - Network and processes: ${GREEN}dstat -nf --top-io${RESET}"
+
+    # File Operations
+    
+    ["find"]="Search for files\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} find path [expression]\n${BOLD}Examples:\n${RESET}  - Find by name: ${GREEN}find . -name 'file.txt'${RESET}\n  - Find by type: ${GREEN}find . -type f${RESET}\n  - Find by size: ${GREEN}find . -size +10M${RESET}\n  - Find by modification time: ${GREEN}find . -mtime -7${RESET}\n  - Find by permissions: ${GREEN}find . -perm 644${RESET}"
+    
+    ["fd"]="Modern find alternative\n\n${BOLD}Installation:${RESET} sudo apt install fd\n${BOLD}Basic Usage:${RESET} fd pattern [path]\n${BOLD}Examples:\n${RESET}  - Smart search: ${GREEN}fd '.*\.txt'${RESET}\n  - Type filter: ${GREEN}fd -t f 'config'${RESET}\n  - Exclude directories: ${GREEN}fd -E .git${RESET}\n  - Smart case: ${GREEN}fd -i 'file'${RESET}\n  - Full path: ${GREEN}fd -t d -x echo "Found directory: {}"${RESET}"
+    
+    ["ripgrep"]="Fast text search\n\n${BOLD}Installation:${RESET} sudo apt install ripgrep\n${BOLD}Basic Usage:${RESET} rg pattern [path]\n${BOLD}Examples:\n${RESET}  - Smart case: ${GREEN}rg 'error'${RESET}\n  - Type filter: ${GREEN}rg -t json 'key'${RESET}\n  - Ignore gitignored: ${GREEN}rg --gitignore${RESET}\n  - Files with matches: ${GREEN}rg -l 'pattern'${RESET}\n  - Case insensitive: ${GREEN}rg -i 'pattern'${RESET}"
+    
+    ["fzf"]="Interactive fuzzy finder\n\n${BOLD}Installation:${RESET} sudo apt install fzf\n${BOLD}Basic Usage:${RESET} fzf\n${BOLD}Examples:\n${RESET}  - File search: ${GREEN}fzf${RESET}\n  - With ripgrep: ${GREEN}rg 'pattern' | fzf${RESET}\n  - Preview files: ${GREEN}fzf --preview 'cat {}'${RESET}\n  - Multi-select: ${GREEN}fzf --multi${RESET}\n  - Exact match: ${GREEN}fzf --exact${RESET}"
+    
+    ["ranger"]="Visual file manager\n\n${BOLD}Installation:${RESET} sudo apt install ranger\n${BOLD}Basic Usage:${RESET} ranger\n${BOLD}Examples:\n${RESET}  - Open directory: ${GREEN}ranger /path${RESET}\n  - With preview: ${GREEN}ranger --preview-window=right:50%${RESET}\n  - Quick view: ${GREEN}ranger -v${RESET}\n  - With bookmarks: ${GREEN}ranger --show-hidden${RESET}\n  - With plugins: ${GREEN}ranger --plugins${RESET}"
+    
+    ["mc"]="Midnight Commander\n\n${BOLD}Installation:${RESET} sudo apt install mc\n${BOLD}Basic Usage:${RESET} mc\n${BOLD}Examples:\n${RESET}  - Open directory: ${GREEN}mc /path${RESET}\n  - With panel: ${GREEN}mc -p${RESET}\n  - Quick view: ${GREEN}mc -Q${RESET}\n  - With shell: ${GREEN}mc -S${RESET}\n  - With bookmarks: ${GREEN}mc -b${RESET}"
+    
+    ["ncdu"]="Disk usage analyzer\n\n${BOLD}Installation:${RESET} sudo apt install ncdu\n${BOLD}Basic Usage:${RESET} ncdu\n${BOLD}Examples:\n${RESET}  - Scan directory: ${GREEN}ncdu /home${RESET}\n  - Quick scan: ${GREEN}ncdu -q${RESET}\n  - Sort by size: ${GREEN}ncdu -s${RESET}\n  - Sort by name: ${GREEN}ncdu -n${RESET}\n  - Sort by count: ${GREEN}ncdu -c${RESET}"
+    
+    ["rsync"]="File synchronization\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} rsync [options] source destination\n${BOLD}Examples:\n${RESET}  - Sync directories: ${GREEN}rsync -av /src /dest${RESET}\n  - Remote sync: ${GREEN}rsync -av /src user@host:/dest${RESET}\n  - Delete extras: ${GREEN}rsync -av --delete /src /dest${RESET}\n  - Dry run: ${GREEN}rsync -av --dry-run /src /dest${RESET}\n  - Bandwidth limit: ${GREEN}rsync -av --bwlimit=1000 /src /dest${RESET}"
+    
+    ["fdupes"]="Find duplicate files\n\n${BOLD}Installation:${RESET} sudo apt install fdupes\n${BOLD}Basic Usage:${RESET} fdupes [options] [path]\n${BOLD}Examples:\n${RESET}  - Find duplicates: ${GREEN}fdupes .${RESET}\n  - Delete duplicates: ${GREEN}fdupes -dN .${RESET}\n  - Recursively: ${GREEN}fdupes -r .${RESET}\n  - Show sizes: ${GREEN}fdupes -S .${RESET}\n  - Interactive delete: ${GREEN}fdupes -i .${RESET}"
+    
+    ["tree"]="Display directory tree\n\n${BOLD}Installation:${RESET} sudo apt install tree\n${BOLD}Basic Usage:${RESET} tree\n${BOLD}Examples:\n${RESET}  - Include files: ${GREEN}tree -a${RESET}\n  - Directory only: ${GREEN}tree -d${RESET}\n  - With size: ${GREEN}tree -s${RESET}\n  - With modification time: ${GREEN}tree -D${RESET}\n  - With file types: ${GREEN}tree -F${RESET}"
+
+    # Package Management
+    
+    ["apt"]="Advanced Package Tool\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} apt command\n${BOLD}Examples:\n${RESET}  - Install package: ${GREEN}sudo apt install package${RESET}\n  - Update packages: ${GREEN}sudo apt update && sudo apt upgrade${RESET}\n  - Remove package: ${GREEN}sudo apt remove package${RESET}\n  - Search packages: ${GREEN}apt search package${RESET}\n  - Show package info: ${GREEN}apt show package${RESET}"
+    
+    ["dpkg"]="Debian package manager\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} dpkg command\n${BOLD}Examples:\n${RESET}  - List installed: ${GREEN}dpkg -l${RESET}\n  - Install .deb: ${GREEN}sudo dpkg -i package.deb${RESET}\n  - Remove package: ${GREEN}sudo dpkg -r package${RESET}\n  - Show info: ${GREEN}dpkg -s package${RESET}\n  - List files: ${GREEN}dpkg -L package${RESET}"
+    
+    ["snap"]="Snap package manager\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} snap command\n${BOLD}Examples:\n${RESET}  - Install snap: ${GREEN}sudo snap install package${RESET}\n  - List snaps: ${GREEN}snap list${RESET}\n  - Remove snap: ${GREEN}sudo snap remove package${RESET}\n  - Update snap: ${GREEN}sudo snap refresh package${RESET}\n  - View info: ${GREEN}snap info package${RESET}"
+    
+    ["flatpak"]="Flatpak package manager\n\n${BOLD}Installation:${RESET} sudo apt install flatpak\n${BOLD}Basic Usage:${RESET} flatpak command\n${BOLD}Examples:\n${RESET}  - Install app: ${GREEN}flatpak install flathub com.example.App${RESET}\n  - List apps: ${GREEN}flatpak list${RESET}\n  - Remove app: ${GREEN}flatpak remove com.example.App${RESET}\n  - Update apps: ${GREEN}flatpak update${RESET}\n  - Show info: ${GREEN}flatpak info com.example.App${RESET}"
+    
+    ["pip"]="Python package manager\n\n${BOLD}Installation:${RESET} Pre-installed with Python\n${BOLD}Basic Usage:${RESET} pip command\n${BOLD}Examples:\n${RESET}  - Install package: ${GREEN}pip install package${RESET}\n  - Upgrade package: ${GREEN}pip install --upgrade package${RESET}\n  - List packages: ${GREEN}pip list${RESET}\n  - Show package info: ${GREEN}pip show package${RESET}\n  - Freeze requirements: ${GREEN}pip freeze > requirements.txt${RESET}"
+
+    # Development Tools
+    
+    ["git"]="Version control system\n\n${BOLD}Installation:${RESET} sudo apt install git\n${BOLD}Basic Usage:${RESET} git command\n${BOLD}Examples:\n${RESET}  - Clone repo: ${GREEN}git clone url${RESET}\n  - Status: ${GREEN}git status${RESET}\n  - Add files: ${GREEN}git add .${RESET}\n  - Commit: ${GREEN}git commit -m "message"${RESET}\n  - Push: ${GREEN}git push origin main${RESET}"
+    
+    ["vim"]="Advanced text editor\n\n${BOLD}Installation:${RESET} sudo apt install vim\n${BOLD}Basic Usage:${RESET} vim file.txt\n${BOLD}Examples:\n${RESET}  - Open file: ${GREEN}vim file.txt${RESET}\n  - Edit mode: ${GREEN}i${RESET}\n  - Save and quit: ${GREEN}:wq${RESET}\n  - Quit without saving: ${GREEN}:q!${RESET}\n  - Search: ${GREEN}/pattern${RESET}"
+    
+    ["nano"]="Simple text editor\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} nano file.txt\n${BOLD}Examples:\n${RESET}  - Open file: ${GREEN}nano file.txt${RESET}\n  - Save: ${GREEN}Ctrl+O${RESET}\n  - Quit: ${GREEN}Ctrl+X${RESET}\n  - Search: ${GREEN}Ctrl+W${RESET}\n  - Replace: ${GREEN}Ctrl+\${RESET}"
+    
+    ["emacs"]="Extensible text editor\n\n${BOLD}Installation:${RESET} sudo apt install emacs\n${BOLD}Basic Usage:${RESET} emacs file.txt\n${BOLD}Examples:\n${RESET}  - Open file: ${GREEN}emacs file.txt${RESET}\n  - Save: ${GREEN}Ctrl+X Ctrl+S${RESET}\n  - Quit: ${GREEN}Ctrl+X Ctrl+C${RESET}\n  - Search: ${GREEN}Ctrl+S${RESET}\n  - Replace: ${GREEN}Alt+%${RESET}"
+    
+    ["make"]="Build automation tool\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} make\n${BOLD}Examples:\n${RESET}  - Build: ${GREEN}make${RESET}\n  - Clean: ${GREEN}make clean${RESET}\n  - Rebuild: ${GREEN}make rebuild${RESET}\n  - Show targets: ${GREEN}make -p${RESET}\n  - Dry run: ${GREEN}make -n${RESET}"
+    
+    ["gcc"]="GNU Compiler Collection\n\n${BOLD}Installation:${RESET} sudo apt install gcc\n${BOLD}Basic Usage:${RESET} gcc [options] source.c\n${BOLD}Examples:\n${RESET}  - Compile: ${GREEN}gcc program.c -o program${RESET}\n  - Debug info: ${GREEN}gcc -g program.c${RESET}\n  - Optimization: ${GREEN}gcc -O2 program.c${RESET}\n  - Static linking: ${GREEN}gcc -static program.c${RESET}\n  - Include path: ${GREEN}gcc -I/path program.c${RESET}"
+    
+    ["gdb"]="GNU Debugger\n\n${BOLD}Installation:${RESET} sudo apt install gdb\n${BOLD}Basic Usage:${RESET} gdb program\n${BOLD}Examples:\n${RESET}  - Start: ${GREEN}gdb program${RESET}\n  - Run: ${GREEN}run${RESET}\n  - Breakpoint: ${GREEN}break main${RESET}\n  - Step: ${GREEN}step${RESET}\n  - Continue: ${GREEN}continue${RESET}"
+    
+    ["curl"]="Transfer data with URLs\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} curl [options] URL\n${BOLD}Examples:\n${RESET}  - Download: ${GREEN}curl -O url${RESET}\n  - Headers: ${GREEN}curl -I url${RESET}\n  - Post data: ${GREEN}curl -X POST -d data url${RESET}\n  - Save as: ${GREEN}curl -o file url${RESET}\n  - Follow redirects: ${GREEN}curl -L url${RESET}"
+    
+    ["wget"]="Download files from web\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} wget URL\n${BOLD}Examples:\n${RESET}  - Download: ${GREEN}wget url${RESET}\n  - Background: ${GREEN}wget -b url${RESET}\n  - Recursive: ${GREEN}wget -r url${RESET}\n  - Continue: ${GREEN}wget -c url${RESET}\n  - Output name: ${GREEN}wget -O file url${RESET}"
+    
+    ["tar"]="Archive files\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} tar [options] archive.tar\n${BOLD}Examples:\n${RESET}  - Create: ${GREEN}tar -czf archive.tar.gz files/*${RESET}\n  - Extract: ${GREEN}tar -xzf archive.tar.gz${RESET}\n  - List: ${GREEN}tar -tzf archive.tar.gz${RESET}\n  - Append: ${GREEN}tar -rf archive.tar file.txt${RESET}\n  - Extract specific: ${GREEN}tar -xzf archive.tar.gz file.txt${RESET}"
+    
+    ["gzip"]="Compress files\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} gzip [options] file.txt\n${BOLD}Examples:\n${RESET}  - Compress: ${GREEN}gzip file.txt${RESET}\n  - Decompress: ${GREEN}gzip -d file.txt.gz${RESET}\n  - List: ${GREEN}gzip -l file.txt.gz${RESET}\n  - Append: ${GREEN}gzip -c file.txt > file.txt.gz${RESET}\n  - Extract specific: ${GREEN}gzip -d file.txt.gz${RESET}"
+    
+    ["zip"]="File compression\n\n${BOLD}Installation:${RESET} sudo apt install zip\n${BOLD}Basic Usage:${RESET} zip [options] archive.zip files\n${BOLD}Examples:\n${RESET}  - Create: ${GREEN}zip archive.zip files/*${RESET}\n  - Add file: ${GREEN}zip -u archive.zip file.txt${RESET}\n  - Delete file: ${GREEN}zip -d archive.zip file.txt${RESET}\n  - List contents: ${GREEN}zip -l archive.zip${RESET}\n  - Add directory: ${GREEN}zip -r archive.zip dir/${RESET}"
+    
+    ["unzip"]="Extract zip files\n\n${BOLD}Installation:${RESET} sudo apt install unzip\n${BOLD}Basic Usage:${RESET} unzip archive.zip\n${BOLD}Examples:\n${RESET}  - Extract: ${GREEN}unzip archive.zip${RESET}\n  - List contents: ${GREEN}unzip -l archive.zip${RESET}\n  - Extract specific: ${GREEN}unzip archive.zip file.txt${RESET}\n  - Extract to dir: ${GREEN}unzip archive.zip -d dir/${RESET}\n  - Overwrite: ${GREEN}unzip -o archive.zip${RESET}"
+
+    # Security Tools
+    
+    ["nmap"]="Network scanning\n\n${BOLD}Installation:${RESET} sudo apt install nmap\n${BOLD}Basic Usage:${RESET} nmap [options] target\n${BOLD}Examples:\n${RESET}  - Quick scan: ${GREEN}nmap -F target${RESET}\n  - OS detection: ${GREEN}nmap -O target${RESET}\n  - Port scan: ${GREEN}nmap -p 80,443 target${RESET}\n  - Aggressive scan: ${GREEN}nmap -A target${RESET}\n  - Service version: ${GREEN}nmap -sV target${RESET}"
+    
+    ["lynis"]="Security auditing\n\n${BOLD}Installation:${RESET} sudo apt install lynis\n${BOLD}Basic Usage:${RESET} lynis audit system\n${BOLD}Examples:\n${RESET}  - Full audit: ${GREEN}lynis audit system${RESET}\n  - Quick audit: ${GREEN}lynis audit system --quick${RESET}\n  - Report format: ${GREEN}lynis audit system --report-file report.txt${RESET}\n  - Specific test: ${GREEN}lynis audit system --tests-from-group malware${RESET}\n  - Update: ${GREEN}lynis update info${RESET}"
+    
+    ["chkrootkit"]="Rootkit detection\n\n${BOLD}Installation:${RESET} sudo apt install chkrootkit\n${BOLD}Basic Usage:${RESET} chkrootkit\n${BOLD}Examples:\n${RESET}  - Full scan: ${GREEN}sudo chkrootkit${RESET}\n  - Specific test: ${GREEN}sudo chkrootkit -q${RESET}\n  - Version check: ${GREEN}sudo chkrootkit -v${RESET}\n  - Help: ${GREEN}sudo chkrootkit -h${RESET}\n  - List tests: ${GREEN}sudo chkrootkit -l${RESET}"
+    
+    ["rkhunter"]="Rootkit scanner\n\n${BOLD}Installation:${RESET} sudo apt install rkhunter\n${BOLD}Basic Usage:${RESET} rkhunter --check\n${BOLD}Examples:\n${RESET}  - Full scan: ${GREEN}sudo rkhunter --check${RESET}\n  - Update: ${GREEN}sudo rkhunter --update${RESET}\n  - Properties update: ${GREEN}sudo rkhunter --propupd${RESET}\n  - Check system: ${GREEN}sudo rkhunter --checkall${RESET}\n  - Help: ${GREEN}sudo rkhunter --help${RESET}"
+    
+    ["fail2ban"]="Intrusion prevention\n\n${BOLD}Installation:${RESET} sudo apt install fail2ban\n${BOLD}Basic Usage:${RESET} fail2ban-client status\n${BOLD}Examples:\n${RESET}  - Start: ${GREEN}sudo systemctl start fail2ban${RESET}\n  - Status: ${GREEN}sudo fail2ban-client status${RESET}\n  - Jails: ${GREEN}sudo fail2ban-client status sshd${RESET}\n  - Ban IP: ${GREEN}sudo fail2ban-client set sshd banip 1.2.3.4${RESET}\n  - Unban IP: ${GREEN}sudo fail2ban-client set sshd unbanip 1.2.3.4${RESET}"
+    
+    ["ufw"]="Uncomplicated Firewall\n\n${BOLD}Installation:${RESET} sudo apt install ufw\n${BOLD}Basic Usage:${RESET} ufw command\n${BOLD}Examples:\n${RESET}  - Enable: ${GREEN}sudo ufw enable${RESET}\n  - Status: ${GREEN}sudo ufw status${RESET}\n  - Allow port: ${GREEN}sudo ufw allow 80/tcp${RESET}\n  - Deny port: ${GREEN}sudo ufw deny 22/tcp${RESET}\n  - Delete rule: ${GREEN}sudo ufw delete allow 80/tcp${RESET}"
+    
+    ["openssl"]="Secure communications\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} openssl command\n${BOLD}Examples:\n${RESET}  - Generate key: ${GREEN}openssl genrsa -out key.pem 2048${RESET}\n  - Generate CSR: ${GREEN}openssl req -new -key key.pem -out csr.pem${RESET}\n  - View cert: ${GREEN}openssl x509 -in cert.pem -text${RESET}\n  - Check SSL: ${GREEN}openssl s_client -connect example.com:443${RESET}\n  - Generate self-signed: ${GREEN}openssl req -x509 -newkey rsa:2048 -nodes${RESET}"
+    
+    ["gpg"]="GNU Privacy Guard\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} gpg command\n${BOLD}Examples:\n${RESET}  - Generate key: ${GREEN}gpg --gen-key${RESET}\n  - List keys: ${GREEN}gpg --list-keys${RESET}\n  - Encrypt file: ${GREEN}gpg -e file.txt${RESET}\n  - Decrypt file: ${GREEN}gpg -d file.txt.gpg${RESET}\n  - Sign file: ${GREEN}gpg --sign file.txt${RESET}"
+    
+    ["john"]="Password cracker\n\n${BOLD}Installation:${RESET} sudo apt install john\n${BOLD}Basic Usage:${RESET} john [options] hashfile\n${BOLD}Examples:\n${RESET}  - Crack passwords: ${GREEN}john hash.txt${RESET}\n  - Show cracked: ${GREEN}john --show hash.txt${RESET}\n  - Wordlist mode: ${GREEN}john --wordlist=wordlist.txt hash.txt${RESET}\n  - Incremental mode: ${GREEN}john --incremental hash.txt${RESET}\n  - Format check: ${GREEN}john --test${RESET}"
+    
+    ["hydra"]="Network login cracker\n\n${BOLD}Installation:${RESET} sudo apt install hydra\n${BOLD}Basic Usage:${RESET} hydra [options] target\n${BOLD}Examples:\n${RESET}  - SSH brute force: ${GREEN}hydra -l user -P passwords.txt ssh://target${RESET}\n  - FTP brute force: ${GREEN}hydra -L users.txt -P passwords.txt ftp://target${RESET}\n  - HTTP auth: ${GREEN}hydra -l admin -P passwords.txt http-get://target${RESET}\n  - Show progress: ${GREEN}hydra -v -V target${RESET}\n  - Resume attack: ${GREEN}hydra -R target${RESET}"
+
+    # Disk Utilities
+    
+    ["df"]="Disk space usage\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} df [options]\n${BOLD}Examples:\n${RESET}  - Human readable: ${GREEN}df -h${RESET}\n  - Inodes: ${GREEN}df -i${RESET}\n  - Specific filesystem: ${GREEN}df /path${RESET}\n  - Block size: ${GREEN}df -B1M${RESET}\n  - Type filter: ${GREEN}df -t ext4${RESET}"
+    
+    ["du"]="Directory space usage\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} du [options] [file]...\n${BOLD}Examples:\n${RESET}  - Human readable: ${GREEN}du -h${RESET}\n  - Directory summary: ${GREEN}du -sh${RESET}\n  - Directory only: ${GREEN}du -sh */${RESET}\n  - Find large files: ${GREEN}du -sh */ | sort -rh | head -5${RESET}\n  - Specific type: ${GREEN}du -h --max-depth=1${RESET}"
+    
+    ["fdisk"]="Partition manager\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} sudo fdisk [options] [device]\n${BOLD}Examples:\n${RESET}  - List partitions: ${GREEN}sudo fdisk -l${RESET}\n  - Create partition: ${GREEN}sudo fdisk /dev/sdX${RESET}\n  - Delete partition: ${GREEN}sudo fdisk /dev/sdX${RESET}\n  - Print partition table: ${GREEN}sudo fdisk -l /dev/sdX${RESET}\n  - Change type: ${GREEN}sudo fdisk /dev/sdX${RESET}"
+    
+    ["parted"]="Partition editor\n\n${BOLD}Installation:${RESET} sudo apt install parted\n${BOLD}Basic Usage:${RESET} sudo parted [options] [device]\n${BOLD}Examples:\n${RESET}  - List partitions: ${GREEN}sudo parted /dev/sdX print${RESET}\n  - Create partition: ${GREEN}sudo parted /dev/sdX mkpart${RESET}\n  - Resize partition: ${GREEN}sudo parted /dev/sdX resizepart${RESET}\n  - Set boot flag: ${GREEN}sudo parted /dev/sdX set 1 boot on${RESET}\n  - Create label: ${GREEN}sudo parted /dev/sdX mklabel gpt${RESET}"
+    
+    ["gparted"]="Graphical partition editor\n\n${BOLD}Installation:${RESET} sudo apt install gparted\n${BOLD}Basic Usage:${RESET} sudo gparted\n${BOLD}Examples:\n${RESET}  - Start GUI: ${GREEN}sudo gparted${RESET}\n  - Create partition: ${GREEN}sudo gparted /dev/sdX${RESET}\n  - Resize partition: ${GREEN}sudo gparted /dev/sdX${RESET}\n  - Move partition: ${GREEN}sudo gparted /dev/sdX${RESET}\n  - Format partition: ${GREEN}sudo gparted /dev/sdX${RESET}"
+    
+    ["testdisk"]="Partition recovery\n\n${BOLD}Installation:${RESET} sudo apt install testdisk\n${BOLD}Basic Usage:${RESET} sudo testdisk\n${BOLD}Examples:\n${RESET}  - Start: ${GREEN}sudo testdisk${RESET}\n  - Analyze disk: ${GREEN}sudo testdisk /dev/sdX${RESET}\n  - List partitions: ${GREEN}sudo testdisk /dev/sdX${RESET}\n  - Repair partition: ${GREEN}sudo testdisk /dev/sdX${RESET}\n  - Copy files: ${GREEN}sudo testdisk /dev/sdX${RESET}"
+    
+    ["smartctl"]="SMART monitoring\n\n${BOLD}Installation:${RESET} sudo apt install smartmontools\n${BOLD}Basic Usage:${RESET} sudo smartctl [options] device\n${BOLD}Examples:\n${RESET}  - Health check: ${GREEN}sudo smartctl -H /dev/sdX${RESET}\n  - Full info: ${GREEN}sudo smartctl -a /dev/sdX${RESET}\n  - Self test: ${GREEN}sudo smartctl -t long /dev/sdX${RESET}\n  - Monitor: ${GREEN}sudo smartctl -d sat -H /dev/sdX${RESET}\n  - Enable SMART: ${GREEN}sudo smartctl -s on /dev/sdX${RESET}"
+    
+    ["badblocks"]="Check for bad blocks\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} sudo badblocks [options] device\n${BOLD}Examples:\n${RESET}  - Quick read-only: ${GREEN}sudo badblocks -v /dev/sdX${RESET}\n  - Write test: ${GREEN}sudo badblocks -wsv /dev/sdX${RESET}\n  - Specific block size: ${GREEN}sudo badblocks -b 4096 /dev/sdX${RESET}\n  - Output to file: ${GREEN}sudo badblocks /dev/sdX > badblocks.txt${RESET}\n  - Skip first blocks: ${GREEN}sudo badblocks -o 1024 /dev/sdX${RESET}"
+    
+    ["fsck"]="File system check\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} sudo fsck [options] device\n${BOLD}Examples:\n${RESET}  - Check file system: ${GREEN}sudo fsck /dev/sdX${RESET}\n  - Force check: ${GREEN}sudo fsck -f /dev/sdX${RESET}\n  - Check specific type: ${GREEN}sudo fsck.ext4 /dev/sdX${RESET}\n  - Check all: ${GREEN}sudo fsck -A${RESET}\n  - Check without mount: ${GREEN}sudo fsck -n /dev/sdX${RESET}"
+    
+    ["mkfs"]="Create file system\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} sudo mkfs [options] device\n${BOLD}Examples:\n${RESET}  - Create ext4: ${GREEN}sudo mkfs.ext4 /dev/sdX${RESET}\n  - Create FAT32: ${GREEN}sudo mkfs.vfat /dev/sdX${RESET}\n  - Create NTFS: ${GREEN}sudo mkfs.ntfs /dev/sdX${RESET}\n  - Create swap: ${GREEN}sudo mkswap /dev/sdX${RESET}\n  - Create Btrfs: ${GREEN}sudo mkfs.btrfs /dev/sdX${RESET}"
+    
+    ["mount"]="Mount filesystems\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} mount [options] source target\n${BOLD}Examples:\n${RESET}  - Mount device: ${GREEN}sudo mount /dev/sdX /mnt${RESET}\n  - Mount ISO: ${GREEN}sudo mount -o loop image.iso /mnt${RESET}\n  - Mount network: ${GREEN}sudo mount -t nfs server:/path /mnt${RESET}\n  - Mount USB: ${GREEN}sudo mount /dev/sdX1 /mnt${RESET}\n  - List mounts: ${GREEN}mount${RESET}"
+    
+    ["npm"]="Node.js package manager\n\n${BOLD}Installation:${RESET} sudo apt install npm\n${BOLD}Basic Usage:${RESET} npm command\n${BOLD}Examples:\n${RESET}  - Install package: ${GREEN}npm install package${RESET}\n  - Global install: ${GREEN}npm install -g package${RESET}\n  - List packages: ${GREEN}npm list${RESET}\n  - Update package: ${GREEN}npm update package${RESET}\n  - Remove package: ${GREEN}npm uninstall package${RESET}"
+    
+    ["yum"]="Yellowdog Updater Modified\n\n${BOLD}Installation:${RESET} Pre-installed on RHEL/CentOS\n${BOLD}Basic Usage:${RESET} yum command\n${BOLD}Examples:\n${RESET}  - Install package: ${GREEN}sudo yum install package${RESET}\n  - Update system: ${GREEN}sudo yum update${RESET}\n  - Remove package: ${GREEN}sudo yum remove package${RESET}\n  - List packages: ${GREEN}yum list${RESET}\n  - Check updates: ${GREEN}yum check-update${RESET}"
+    
+    ["dnf"]="Dandified Yum\n\n${BOLD}Installation:${RESET} Pre-installed on Fedora\n${BOLD}Basic Usage:${RESET} dnf command\n${BOLD}Examples:\n${RESET}  - Install package: ${GREEN}sudo dnf install package${RESET}\n  - Clean cache: ${GREEN}sudo dnf clean all${RESET}\n  - Update system: ${GREEN}sudo dnf update${RESET}\n  - List packages: ${GREEN}dnf list${RESET}\n  - Search packages: ${GREEN}dnf search package${RESET}"
+    
+    ["pacman"]="Arch Linux package manager\n\n${BOLD}Installation:${RESET} Pre-installed on Arch\n${BOLD}Basic Usage:${RESET} pacman command\n${BOLD}Examples:\n${RESET}  - Install package: ${GREEN}sudo pacman -S package${RESET}\n  - Update system: ${GREEN}sudo pacman -Syu${RESET}\n  - Remove package: ${GREEN}sudo pacman -R package${RESET}\n  - Search packages: ${GREEN}pacman -Ss package${RESET}\n  - List installed: ${GREEN}pacman -Q${RESET}"
+    
+    ["fd"]="Simple file finder\n\n${BOLD}Installation:${RESET} sudo apt install fd-find\n${BOLD}Basic Usage:${RESET} fd [pattern]\n${BOLD}Examples:\n${RESET}  - Find files: ${GREEN}fd '.*\.txt'${RESET}\n  - Case insensitive: ${GREEN}fd -i 'readme'${RESET}"
+    
+    ["ripgrep"]="Fast grep\n\n${BOLD}Installation:${RESET} sudo apt install ripgrep\n${BOLD}Basic Usage:${RESET} rg [pattern]\n${BOLD}Examples:\n${RESET}  - Search: ${GREEN}rg 'error'${RESET}\n  - Show context: ${GREEN}rg -C 3 'warning'${RESET}"
 
     # Network Tools
-    ["iftop"]="Display bandwidth usage by connection"
-    ["nethogs"]="Bandwidth monitoring per process"
-    ["tcpdump"]="Powerful packet analyzer"
-    ["wireshark"]="Network protocol analyzer"
+    
+    ["iftop"]="Real-time bandwidth usage\n\n${BOLD}Installation:${RESET} sudo apt install iftop\n${BOLD}Basic Usage:${RESET} sudo iftop\n${BOLD}Examples:\n${RESET}  - Specific interface: ${GREEN}sudo iftop -i eth0${RESET}\n  - Show ports: ${GREEN}sudo iftop -P${RESET}\n  - Show hostnames: ${GREEN}sudo iftop -H${RESET}\n  - Filter: ${GREEN}sudo iftop -f 'port 80'${RESET}\n  - Sort by source: ${GREEN}sudo iftop -s${RESET}"
+    
+    ["nethogs"]="Per-process bandwidth monitoring\n\n${BOLD}Installation:${RESET} sudo apt install nethogs\n${BOLD}Basic Usage:${RESET} sudo nethogs\n${BOLD}Examples:\n${RESET}  - Specific interface: ${GREEN}sudo nethogs eth0${RESET}\n  - Show ports: ${GREEN}sudo nethogs -p${RESET}\n  - Show detailed: ${GREEN}sudo nethogs -d${RESET}\n  - Show totals: ${GREEN}sudo nethogs -t${RESET}\n  - Show summary: ${GREEN}sudo nethogs -s${RESET}"
+    
+    ["netcat"]="Networking utility\n\n${BOLD}Installation:${RESET} sudo apt install netcat\n${BOLD}Basic Usage:${RESET} nc [options] host port\n${BOLD}Examples:\n${RESET}  - Listen: ${GREEN}nc -l 8080${RESET}\n  - Connect: ${GREEN}nc example.com 80${RESET}\n  - Send file: ${GREEN}nc -l 8080 < file.txt${RESET}\n  - Receive file: ${GREEN}nc example.com 8080 > file.txt${RESET}\n  - Keep open: ${GREEN}nc -k 8080${RESET}"
+    
+    ["ss"]="Socket statistics\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} ss [options]\n${BOLD}Examples:\n${RESET}  - Show TCP: ${GREEN}ss -t${RESET}\n  - Show UDP: ${GREEN}ss -u${RESET}\n  - Show listening: ${GREEN}ss -l${RESET}\n  - Show established: ${GREEN}ss -e${RESET}\n  - Show specific port: ${GREEN}ss -t :80${RESET}"
+    
+    ["lsof"]="List open files\n\n${BOLD}Installation:${RESET} sudo apt install lsof\n${BOLD}Basic Usage:${RESET} lsof [options]\n${BOLD}Examples:\n${RESET}  - Show processes: ${GREEN}lsof -p PID${RESET}\n  - Show files: ${GREEN}lsof /path${RESET}\n  - Show network: ${GREEN}lsof -i${RESET}\n  - Show TCP: ${GREEN}lsof -i TCP${RESET}\n  - Show UDP: ${GREEN}lsof -i UDP${RESET}"
+    
+    ["ranger"]="Terminal file manager\n\n${BOLD}Installation:${RESET} sudo apt install ranger\n${BOLD}Basic Usage:${RESET} ranger\n${BOLD}Examples:\n${RESET}  - Start: ${GREEN}ranger${RESET}\n  - Select dir: ${GREEN}ranger --selectfile=file.txt${RESET}"
+    
+    ["mc"]="Midnight Commander\n\n${BOLD}Installation:${RESET} sudo apt install mc\n${BOLD}Basic Usage:${RESET} mc\n${BOLD}Examples:\n${RESET}  - Start: ${GREEN}mc${RESET}\n  - Open dir: ${GREEN}mc /path/to/dir${RESET}"
+    
+    ["ncdu"]="Disk usage analyzer\n\n${BOLD}Installation:${RESET} sudo apt install ncdu\n${BOLD}Basic Usage:${RESET} ncdu [dir]\n${BOLD}Examples:\n${RESET}  - Scan dir: ${GREEN}ncdu /path/to/dir${RESET}\n  - Export: ${GREEN}ncdu -o- / | gzip > scan.gz${RESET}"
+    
+    ["rsync"]="File sync\n\n${BOLD}Installation:${RESET} sudo apt install rsync\n${BOLD}Basic Usage:${RESET} rsync [options] source dest\n${BOLD}Examples:\n${RESET}  - Local copy: ${GREEN}rsync -av /src/ /dest/${RESET}\n  - Remote sync: ${GREEN}rsync -avz user@host:/src/ /dest/${RESET}"
+    
+    ["fdupes"]="Find duplicates\n\n${BOLD}Installation:${RESET} sudo apt install fdupes\n${BOLD}Basic Usage:${RESET} fdupes [dir]\n${BOLD}Examples:\n${RESET}  - Find duplicates: ${GREEN}fdupes -r /path${RESET}\n  - Delete dupes: ${GREEN}fdupes -rd /path${RESET}"
+    
+    ["tree"]="Directory tree\n\n${BOLD}Installation:${RESET} sudo apt install tree\n${BOLD}Basic Usage:${RESET} tree [dir]\n${BOLD}Examples:\n${RESET}  - Show tree: ${GREEN}tree${RESET}\n  - Show sizes: ${GREEN}tree -h${RESET}"
+    
+    ["nethogs"]="Bandwidth monitoring per process\n\n${BOLD}Installation:${RESET} sudo apt install nethogs\n${BOLD}Basic Usage:${RESET} sudo nethogs\n${BOLD}Examples:\n${RESET}  - Monitor specific interface: ${GREEN}sudo nethogs eth0\n  - Refresh every 5s: ${GREEN}sudo nethogs -d 5${RESET}"
+    
+    ["tcpdump"]="Powerful packet analyzer\n\n${BOLD}Installation:${RESET} sudo apt install tcpdump\n${BOLD}Basic Usage:${RESET} sudo tcpdump\n${BOLD}Examples:\n${RESET}  - Capture HTTP traffic: ${GREEN}sudo tcpdump -i eth0 port 80\n  - Save to file: ${GREEN}sudo tcpdump -w capture.pcap${RESET}"
+    
+    ["wireshark"]="Network protocol analyzer\n\n${BOLD}Installation:${RESET} sudo apt install wireshark\n${BOLD}Basic Usage:${RESET} wireshark\n${BOLD}Examples:\n${RESET}  - GUI mode: ${GREEN}wireshark\n  - Capture to file: ${GREEN}wireshark -i eth0 -k -w capture.pcap${RESET}"
 
     # Text Manipulation
-    ["grep"]="Search text using patterns"
-    ["awk"]="Pattern scanning and processing"
-    ["sed"]="Stream editor for filtering and transforming text"
-    ["jq"]="Command-line JSON processor"
+    
+    ["grep"]="Pattern search\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} grep 'pattern' file\n${BOLD}Examples:\n${RESET}  - Case insensitive: ${GREEN}grep -i 'error' log.txt${RESET}\n  - Line numbers: ${GREEN}grep -n 'warning' log.txt${RESET}\n  - Recursive: ${GREEN}grep -r 'function' src/${RESET}"
+    
+    ["jq"]="JSON processor\n\n${BOLD}Installation:${RESET} sudo apt install jq\n${BOLD}Basic Usage:${RESET} jq [options] file.json\n${BOLD}Examples:\n${RESET}  - Pretty print: ${GREEN}jq . file.json${RESET}\n  - Filter: ${GREEN}jq '.name' file.json${RESET}\n  - Map: ${GREEN}jq 'map(.name)' file.json${RESET}\n  - Reduce: ${GREEN}jq 'reduce .[] as $item (0; . + $item.value)' file.json${RESET}\n  - Join: ${GREEN}jq -s '.[0] * .[1]' file1.json file2.json${RESET}"
+    
+    ["tr"]="Translate characters\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} tr SET1 SET2\n${BOLD}Examples:\n${RESET}  - Replace: ${GREEN}tr 'a' 'b'${RESET}\n  - Delete: ${GREEN}tr -d 'a'${RESET}\n  - Complement: ${GREEN}tr -c 'a'${RESET}\n  - Squeeze: ${GREEN}tr -s ' '${RESET}\n  - Translate: ${GREEN}tr '[:lower:]' '[:upper:]'${RESET}"
+    
+    ["column"]="Format columns\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} column [options]\n${BOLD}Examples:\n${RESET}  - Basic: ${GREEN}column -t${RESET}\n  - Number of columns: ${GREEN}column -c 80${RESET}\n  - Separator: ${GREEN}column -s: -t${RESET}\n  - Fill: ${GREEN}column -x${RESET}\n  - Width: ${GREEN}column -W 1${RESET}"
+    
+    ["paste"]="Merge lines\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} paste [options] file1 file2\n${BOLD}Examples:\n${RESET}  - Basic: ${GREEN}paste file1 file2${RESET}\n  - Delimiter: ${GREEN}paste -d ',' file1 file2${RESET}\n  - Series: ${GREEN}paste -s file${RESET}\n  - Zero terminated: ${GREEN}paste -z file${RESET}\n  - Ignore blanks: ${GREEN}paste -d ' ' -s file${RESET}"
+    
+    ["xargs"]="Execute commands\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} xargs [options] command\n${BOLD}Examples:\n${RESET}  - Basic: ${GREEN}echo 'file.txt' | xargs cat${RESET}\n  - Multiple: ${GREEN}ls | xargs -n 2${RESET}\n  - Parallel: ${GREEN}xargs -P 4${RESET}\n  - Replace: ${GREEN}xargs -I {} echo {}${RESET}\n  - Null terminated: ${GREEN}xargs -0${RESET}"
+    
+    ["awk"]="Text processing\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} awk 'pattern {action}' file\n${BOLD}Examples:\n${RESET}  - First column: ${GREEN}awk '{print $1}' file.txt${RESET}\n  - Sum column: ${GREEN}awk '{sum+=$3} END {print sum}' data.txt${RESET}\n  - Filter: ${GREEN}awk '/error/' log.txt${RESET}"
+    
+    ["sed"]="Stream editor\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} sed 's/pattern/replacement/' file\n${BOLD}Examples:\n${RESET}  - Replace: ${GREEN}sed 's/foo/bar/g' file.txt${RESET}\n  - Delete lines: ${GREEN}sed '/pattern/d' file.txt${RESET}\n  - In-place: ${GREEN}sed -i 's/old/new/' file.txt${RESET}"
+    
+    ["jq"]="JSON processor\n\n${BOLD}Installation:${RESET} sudo apt install jq\n${BOLD}Basic Usage:${RESET} jq 'filter' file.json\n${BOLD}Examples:\n${RESET}  - Pretty print: ${GREEN}cat file.json | jq '.'${RESET}\n  - Extract field: ${GREEN}jq '.name' data.json${RESET}\n  - Filter array: ${GREEN}jq '.[] | select(.age > 30)' users.json${RESET}"
+    
+    ["cut"]="Column cutter\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} cut -d',' -f1 file.csv\n${BOLD}Examples:\n${RESET}  - Get 3rd field: ${GREEN}cut -d' ' -f3 file.txt${RESET}\n  - Characters 1-5: ${GREEN}cut -c1-5 file.txt${RESET}"
+    
+    ["sort"]="Sort lines\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} sort file.txt\n${BOLD}Examples:\n${RESET}  - Numeric sort: ${GREEN}sort -n numbers.txt${RESET}\n  - Unique lines: ${GREEN}sort -u file.txt${RESET}"
+    
+    ["uniq"]="Filter duplicates\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} uniq file.txt\n${BOLD}Examples:\n${RESET}  - Count occurrences: ${GREEN}sort file.txt | uniq -c${RESET}\n  - Only show duplicates: ${GREEN}sort file.txt | uniq -d${RESET}"
+    
+    ["tr"]="Character translator\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} tr 'a-z' 'A-Z' < file.txt\n${BOLD}Examples:\n${RESET}  - Lower to upper: ${GREEN}echo 'hello' | tr 'a-z' 'A-Z'${RESET}\n  - Delete chars: ${GREEN}echo 'hello' | tr -d 'l'${RESET}"
+    
+    ["column"]="Column formatter\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} column -t file.txt\n${BOLD}Examples:\n${RESET}  - Table format: ${GREEN}ls -l | column -t${RESET}\n  - CSV to table: ${GREEN}column -s, -t < file.csv${RESET}"
+    
+    ["paste"]="Merge lines\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} paste file1 file2\n${BOLD}Examples:\n${RESET}  - Side by side: ${GREEN}paste file1 file2${RESET}\n  - Serial merge: ${GREEN}paste -s file.txt${RESET}"
+    
+    ["xargs"]="Argument builder\n\n${BOLD}Installation:${RESET} Pre-installed\n${BOLD}Basic Usage:${RESET} command | xargs command\n${BOLD}Examples:\n${RESET}  - Find and delete: ${GREEN}find . -name '*.tmp' | xargs rm${RESET}\n  - Multiple commands: ${GREEN}ls | xargs -I{} echo "Processing {}"${RESET}"
 )
 
 # Categories
@@ -67,15 +259,27 @@ CATEGORIES=(
     "Performance Monitoring"
     "Network Tools"
     "Text Manipulation"
+    "File Operations"
+    "System Information"
+    "Package Management"
+    "Development Tools"
+    "Security Tools"
+    "Disk Utilities"
 )
 
 # Get tools by category
 get_tools_by_category() {
     case $1 in
-    "Process Monitoring") echo "htop glances btop nmon" ;;
-    "Performance Monitoring") echo "htop iostat vmstat dstat" ;;
-    "Network Tools") echo "iftop nethogs tcpdump wireshark" ;;
-    "Text Manipulation") echo "grep awk sed jq" ;;
+    "Process Monitoring") echo "htop glances btop nmon gotop bashtop atop iotop powertop htop-vim" ;;
+    "Performance Monitoring") echo "htop iostat vmstat dstat atop iotop iftop nethogs nmon dmesg sar" ;;
+    "Network Tools") echo "iftop nethogs tcpdump wireshark netcat nmap mtr traceroute iperf3 iproute2 ss lsof" ;;
+    "Text Manipulation") echo "grep awk sed jq cut sort uniq tr column paste xargs" ;;
+    "File Operations") echo "find fd ripgrep fzf ranger mc ncdu rsync fdupes tree" ;;
+    "System Information") echo "neofetch inxi lshw lsblk lscpu lspci lsusb dmidecode hwinfo" ;;
+    "Package Management") echo "apt apt-get dpkg snap flatpak pip npm yum dnf pacman" ;;
+    "Development Tools") echo "git vim nano emacs make gcc gdb curl wget tar zip unzip" ;;
+    "Security Tools") echo "nmap lynis chkrootkit rkhunter fail2ban ufw openssl gpg john hydra" ;;
+    "Disk Utilities") echo "df du fdisk parted gparted testdisk smartctl badblocks" ;;
     esac
 }
 
@@ -83,7 +287,7 @@ get_tools_by_category() {
 show_banner() {
     clear
     echo -e "${BOLD}${PURPLE}┌───────────────────────────────────────────┐"
-    echo -e "│  ${CYAN}🔧  Terminal Tool Finder  ${TOOL}  ${PURPLE}│"
+    echo -e "│      ${CYAN} ${TOOL} Terminal Tool Finder ${TOOL} ${PURPLE}         │"
     echo -e "└───────────────────────────────────────────┘${RESET}"
 }
 
@@ -111,20 +315,23 @@ main() {
         for i in "${!CATEGORIES[@]}"; do
             echo -e "${BLUE}$((i + 1)))${RESET} ${CATEGORIES[$i]}"
         done
-        echo -e "${BLUE}0)${RESET} Exit\n"
+        echo -e "${BLUE}q)${RESET} Exit\n"
 
         # Get user selection
-        read -p "${YELLOW}?${RESET} Enter your choice (0-${#CATEGORIES[@]}): " choice
+        read -p "${YELLOW}?${RESET} Enter your choice (1-${#CATEGORIES[@]}): " choice
+
+        # Handle exit
+        if [[ "$choice" == "q" || "$choice" == "Q" ]]; then
+            break
+        fi
 
         # Validate input
-        if [[ ! "$choice" =~ ^[0-${#CATEGORIES[@]}]$ ]]; then
-            echo -e "${YELLOW}❌ Invalid selection. Please try again.${RESET}"
+        local max_choice=${#CATEGORIES[@]}
+        if [[ ! "$choice" =~ ^[0-9]+$ ]] || ((choice < 1 || choice > max_choice)); then
+            echo -e "${YELLOW}❌ Invalid category selection. Please enter a number between 1 and ${max_choice}.${RESET}"
             sleep 1
             continue
         fi
-
-        # Handle exit
-        [ "$choice" -eq 0 ] && break
 
         # Get selected category
         local category="${CATEGORIES[$((choice - 1))]}"
@@ -133,40 +340,62 @@ main() {
         # Show tools in the selected category
         while true; do
             show_banner
+            echo -e "CATEGORY: ${BOLD}${GREEN}${LIST} ${category} Tools:${RESET}\n"
+
+            for i in "${!tools[@]}"; do
+                echo -e "${BLUE}$((i + 1)))${RESET} ${tools[$i]}"
+            done
+            echo -e "${BLUE}q)${RESET} Back to categories\n"
+            show_banner
             echo -e "${BOLD}${GREEN}${LIST} ${category} Tools:${RESET}\n"
 
             for i in "${!tools[@]}"; do
                 echo -e "${BLUE}$((i + 1)))${RESET} ${tools[$i]}"
             done
-            echo -e "${BLUE}0)${RESET} Back to categories\n"
+            echo -e "${BLUE}q)${RESET} Back to categories\n"
 
             # Get tool selection
-            read -p "${YELLOW}?${RESET} Select a tool (0-${#tools[@]}): " tool_choice
+            read -p "${YELLOW}?${RESET} Select a tool (1-${#tools[@]}) or q to back to categories): " tool_choice
+
+            # Handle back to categories
+            if [[ "$tool_choice" == "q" || "$tool_choice" == "Q" ]]; then
+                break
+            fi
 
             # Validate input
-            if [[ ! "$tool_choice" =~ ^[0-${#tools[@]}]$ ]]; then
-                echo -e "${YELLOW}❌ Invalid selection. Please try again.${RESET}"
+            local max_tool_choice=${#tools[@]}
+            if [[ ! "$tool_choice" =~ ^[0-9]+$ ]] || ((tool_choice < 1 || tool_choice > max_tool_choice)); then
+                echo -e "${YELLOW}❌ Invalid tool selection. Please enter a number between 1 and ${max_tool_choice}.${RESET}"
                 sleep 1
                 continue
             fi
-
-            # Handle back to categories
-            [ "$tool_choice" -eq 0 ] && break
 
             # Show tool info
             local selected_tool="${tools[$((tool_choice - 1))]}"
             local tool_desc="${TOOLS[$selected_tool]}"
 
             show_banner
+            # Split the tool description into sections
+            IFS=$'\n' read -r -d '' -a desc_parts <<<"$tool_desc"
+
             echo -e "${BOLD}${CYAN}${TOOL} ${selected_tool}${RESET}\n"
-            echo -e "${BOLD}Description:${RESET} ${tool_desc}\n"
+
+            # Print each description part with proper formatting
+            for part in "${desc_parts[@]}"; do
+                if [[ "$part" == ${BOLD}* ]]; then
+                    echo -e "$part${RESET}"
+                else
+                    echo -e "$part"
+                fi
+            done
 
             # Save to history
             save_to_history "$selected_tool"
 
-            echo -e "${GREEN}✅ Tool information displayed.${RESET}"
+            echo -e "${GREEN}✅ Tool information displayed.${RESET}\n"
+
             read -p "${YELLOW}?${RESET} Press Enter to continue..."
-            break
+
         done
     done
 

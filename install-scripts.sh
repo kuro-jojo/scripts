@@ -47,7 +47,7 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 # Source directory containing the scripts
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "$0")")" &>/dev/null && pwd)"
 TARGET_DIR="/usr/local/bin"
 
 # Use provided script list or default to script_list.txt in the script directory
@@ -97,7 +97,7 @@ for script in "${SCRIPTS[@]}"; do
     chmod +x "$script_path"
 
     # Copy to target directory without .sh extension
-    cp -v "$script_path" "$TARGET_DIR/$script_name"
+    ln -svf "$script_path" "$TARGET_DIR/$script_name"
     echo "Installed $script as $script_name to $TARGET_DIR/"
 done
 
