@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# This script will help reallocate the swap file
+
+if [[ -z "$1" || "$1" == "-h" || "$1" == "--help" ]]; then
+    echo "Usage: swap <swap_size>" 
+    echo "Note: swap_size is in GB"
+    echo "Example: swap 2" 
+    exit 1
+fi
+
+# Confirm the operation
+read -n 1 -p "Are you sure you want to reallocate the swap file to $1G? (y/n) "
+echo ""
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+    echo "Operation cancelled."
+    exit 1
+fi
+
+# Check if the swap file exists
+if [[ -f /swapfile ]]; then
+    echo "Swap file exists. Disabling swap file..."
+    sudo swapoff /swapfile
+    echo "Removing swap file..."
+    sudo rm /swapfile
+fi
+
+# Create a new swap file
+echo "Creating swap file... $1G"
+sudo fallocate -l $1G /swapfile
+
+# Set the permissions of the swap file
+echo "Setting permissions of swap file..."
+sudo chmod 600 /swapfile
+
+# Make the swap file
+echo "Making swap file..."
+sudo mkswap /swapfile
+
+# Enable the swap file
+echo "Enabling swap file..."
+sudo swapon /swapfile
+
+# Check if the swap file is enabled
+echo "Checking if swap file is enabled..."
+if [[ $(sudo swapon /swapfile) ]]; then
+    echo "Swap file enabled successfully."
+    exit 0
+fi

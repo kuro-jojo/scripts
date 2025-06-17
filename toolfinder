@@ -1,0 +1,177 @@
+#!/bin/bash
+
+# Configuration file path
+CONFIG_FILE="$HOME/.toolfinder_history"
+
+# Create config file if it doesn't exist
+[ ! -f "$CONFIG_FILE" ] && touch "$CONFIG_FILE"
+
+# Check if stdout is a terminal
+if [ -t 1 ]; then
+    # Colors and formatting using tput for better compatibility
+    BOLD=$(tput bold)
+    GREEN=$(tput setaf 2)
+    BLUE=$(tput setaf 4)
+    YELLOW=$(tput setaf 3)
+    PURPLE=$(tput setaf 5)
+    CYAN=$(tput setaf 6)
+    RESET=$(tput sgr0)
+else
+    # No colors if not a terminal
+    BOLD=""
+    GREEN=""
+    BLUE=""
+    YELLOW=""
+    PURPLE=""
+    CYAN=""
+    RESET=""
+fi
+
+# Emojis (using direct Unicode characters for better compatibility)
+TOOL="🔧"
+LIST="📋"
+INFO="ℹ️"
+CLOCK="⏰"
+BYE="👋"
+
+# Tool database
+declare -A TOOLS=(
+    # Process Monitoring
+    ["htop"]="Interactive process viewer (an improved top)"
+    ["glances"]="Cross-platform system monitoring tool"
+    ["btop"]="Modern, feature-rich process monitor"
+    ["nmon"]="AIX & Linux performance monitoring"
+
+    # Performance Monitoring
+    ["htop"]="Interactive process viewer"
+    ["iostat"]="CPU and I/O statistics"
+    ["vmstat"]="System performance monitoring"
+    ["dstat"]="Versatile resource statistics"
+
+    # Network Tools
+    ["iftop"]="Display bandwidth usage by connection"
+    ["nethogs"]="Bandwidth monitoring per process"
+    ["tcpdump"]="Powerful packet analyzer"
+    ["wireshark"]="Network protocol analyzer"
+
+    # Text Manipulation
+    ["grep"]="Search text using patterns"
+    ["awk"]="Pattern scanning and processing"
+    ["sed"]="Stream editor for filtering and transforming text"
+    ["jq"]="Command-line JSON processor"
+)
+
+# Categories
+CATEGORIES=(
+    "Process Monitoring"
+    "Performance Monitoring"
+    "Network Tools"
+    "Text Manipulation"
+)
+
+# Get tools by category
+get_tools_by_category() {
+    case $1 in
+    "Process Monitoring") echo "htop glances btop nmon" ;;
+    "Performance Monitoring") echo "htop iostat vmstat dstat" ;;
+    "Network Tools") echo "iftop nethogs tcpdump wireshark" ;;
+    "Text Manipulation") echo "grep awk sed jq" ;;
+    esac
+}
+
+# Show banner
+show_banner() {
+    clear
+    echo -e "${BOLD}${PURPLE}┌───────────────────────────────────────────┐"
+    echo -e "│  ${CYAN}🔧  Terminal Tool Finder  ${TOOL}  ${PURPLE}│"
+    echo -e "└───────────────────────────────────────────┘${RESET}"
+}
+
+# Show last used tool
+show_last_used() {
+    if [ -s "$CONFIG_FILE" ]; then
+        local last_tool=$(tail -n 1 "$CONFIG_FILE")
+        echo -e "${YELLOW}${CLOCK} Last used tool: ${BOLD}${last_tool}${RESET}\n"
+    fi
+}
+
+# Save tool to history
+save_to_history() {
+    echo "$1" >>"$CONFIG_FILE"
+}
+
+# Main function
+main() {
+    while true; do
+        show_banner
+        show_last_used
+
+        # Show categories
+        echo -e "${BOLD}${GREEN}📋 Select a category:${RESET}"
+        for i in "${!CATEGORIES[@]}"; do
+            echo -e "${BLUE}$((i + 1)))${RESET} ${CATEGORIES[$i]}"
+        done
+        echo -e "${BLUE}0)${RESET} Exit\n"
+
+        # Get user selection
+        read -p "${YELLOW}?${RESET} Enter your choice (0-${#CATEGORIES[@]}): " choice
+
+        # Validate input
+        if [[ ! "$choice" =~ ^[0-${#CATEGORIES[@]}]$ ]]; then
+            echo -e "${YELLOW}❌ Invalid selection. Please try again.${RESET}"
+            sleep 1
+            continue
+        fi
+
+        # Handle exit
+        [ "$choice" -eq 0 ] && break
+
+        # Get selected category
+        local category="${CATEGORIES[$((choice - 1))]}"
+        local tools=($(get_tools_by_category "$category"))
+
+        # Show tools in the selected category
+        while true; do
+            show_banner
+            echo -e "${BOLD}${GREEN}${LIST} ${category} Tools:${RESET}\n"
+
+            for i in "${!tools[@]}"; do
+                echo -e "${BLUE}$((i + 1)))${RESET} ${tools[$i]}"
+            done
+            echo -e "${BLUE}0)${RESET} Back to categories\n"
+
+            # Get tool selection
+            read -p "${YELLOW}?${RESET} Select a tool (0-${#tools[@]}): " tool_choice
+
+            # Validate input
+            if [[ ! "$tool_choice" =~ ^[0-${#tools[@]}]$ ]]; then
+                echo -e "${YELLOW}❌ Invalid selection. Please try again.${RESET}"
+                sleep 1
+                continue
+            fi
+
+            # Handle back to categories
+            [ "$tool_choice" -eq 0 ] && break
+
+            # Show tool info
+            local selected_tool="${tools[$((tool_choice - 1))]}"
+            local tool_desc="${TOOLS[$selected_tool]}"
+
+            show_banner
+            echo -e "${BOLD}${CYAN}${TOOL} ${selected_tool}${RESET}\n"
+            echo -e "${BOLD}Description:${RESET} ${tool_desc}\n"
+
+            # Save to history
+            save_to_history "$selected_tool"
+
+            echo -e "${GREEN}✅ Tool information displayed.${RESET}"
+            read -p "${YELLOW}?${RESET} Press Enter to continue..."
+            break
+        done
+    done
+
+    echo -e "\n${GREEN}${BYE} Thank you for using Terminal Tool Finder!${RESET}"
+}
+
+# Run the script
+main "$@"

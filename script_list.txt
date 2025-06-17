@@ -1,0 +1,5 @@
+install-scripts.sh
+pat
+swap
+toolfinder
+fwatch
