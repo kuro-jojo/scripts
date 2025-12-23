@@ -3,3 +3,6 @@ pat
 swap
 toolfinder
 fwatch
+clean_compress_videos_output
+compress_videos
+battery-limit
