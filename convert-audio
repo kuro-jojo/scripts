@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+
+# --- Input validation ---
+MULTIPLE=false
+usage() {
+    echo "Usage: $0 [-m] INPUT INPUT_FORMAT OUTPUT_FORMAT"
+    echo "  -m: Process multiple files in INPUT directory"
+    echo "  Without -m: Process single INPUT file"
+    echo "Supported OUTPUT_FORMAT: mp3, aac"
+    exit 1
+}
+while getopts "m" opt; do
+    case $opt in
+        m) MULTIPLE=true ;;
+        *)  usage ;;
+    esac
+done
+shift $((OPTIND-1))
+
+if [ $# -ne 3 ]; then
+    usage
+fi
+
+INPUT="$1"
+INPUT_FORMAT="$2"
+OUTPUT_FORMAT="$3"
+
+# Set codec based on output format
+case "$OUTPUT_FORMAT" in
+    mp3) codec="libmp3lame" ;;
+    aac) codec="aac" ;;
+    *) echo "Error: Unsupported output format '$OUTPUT_FORMAT'. Supported: mp3, aac"
+       exit 1 ;;
+esac
+
+if [ "$MULTIPLE" = true ]; then
+    # Multiple files mode: INPUT is directory
+    if [ ! -d "$INPUT" ]; then
+        echo "Error: '$INPUT' is not a valid directory."
+        exit 1
+    fi
+    INPUT_DIR="$INPUT"
+    LOGFILE="${INPUT_DIR}/conversion_failures.log"
+    > "$LOGFILE"
+
+    # Collect files sorted by size, excluding *.log
+    mapfile -t files < <(
+        find "$INPUT_DIR" -maxdepth 1 -type f \
+            -name "*.${INPUT_FORMAT}" \
+            ! -name "*.log" \
+            -printf "%s %p\n" \
+        | sort -n \
+        | awk '{ $1=""; sub(/^ /, ""); print }'
+    )
+
+    for infile in "${files[@]}"; do
+        [ -f "$infile" ] || continue
+
+        filename=$(basename -- "$infile")
+        name="${filename%.*}"
+
+        outfile="${INPUT_DIR}/${name}_converted.${OUTPUT_FORMAT}"
+
+        ffmpeg -y -i "$infile" -acodec "$codec" "$outfile"
+        if [ $? -ne 0 ]; then
+            echo "$filename" >> "$LOGFILE"
+        fi
+    done
+
+    if [ -s "$LOGFILE" ]; then
+        echo "Failures recorded in $LOGFILE"
+    else
+        echo "All files processed successfully."
+    fi
+else
+    # Single file mode: INPUT is file
+    if [ ! -f "$INPUT" ]; then
+        echo "Error: '$INPUT' is not a valid file."
+        exit 1
+    fi
+    if [[ "$INPUT" != *.${INPUT_FORMAT} ]]; then
+        echo "Error: Input file does not match INPUT_FORMAT '$INPUT_FORMAT'."
+        exit 1
+    fi
+
+    infile="$INPUT"
+    outfile="${INPUT%.*}_converted.${OUTPUT_FORMAT}"
+
+    ffmpeg -y -i "$infile" -acodec "$codec" "$outfile"
+    if [ $? -ne 0 ]; then
+        echo "Conversion failed for $INPUT"
+    else
+        echo "Conversion successful: $outfile"
+    fi
+fi

@@ -1,0 +1,47 @@
+#!/bin/bash
+source $HOME/projects/python/yt-dlp/venv/bin/activate
+
+# Check if at least a URL was provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 <URL> [destination_folder] [sleep_seconds]"
+    echo "Example: $0 \"https://www.youtube.com/playlist?list=XYZ\" ./my_music 5"
+    exit 1
+fi
+
+URL="$1"
+DEST_DIR="${2:-$HOME/Music}" # Defaults to current directory if not provided
+SLEEP_TIME="${3:-5}" # Defaults to 5 seconds if not provided
+
+# Create destination directory if it doesn't exist
+mkdir -p "$DEST_DIR"
+
+# Base yt-dlp arguments
+YTDL_ARGS=(
+    "-x"
+    "--audio-format" "mp3"
+    "--audio-quality" "0"
+    "--embed-thumbnail"
+    "--embed-metadata"
+    "--download-archive" "$DEST_DIR/downloaded.txt"
+)
+
+# Add sleep time if specified
+if [ "$SLEEP_TIME" -gt 0 ]; then
+    YTDL_ARGS+=("--sleep-interval" "$SLEEP_TIME")
+fi
+
+# Determine if it's a playlist or a single video
+if [[ "$URL" == *"list="* ]]; then
+    echo "--- Playlist detected ---"
+    YTDL_ARGS+=("--yes-playlist")
+    else
+    echo "--- Single video detected ---"
+    YTDL_ARGS+=("--no-playlist")
+fi
+OUTPUT_TEMPLATE="$DEST_DIR/%(title)s.%(ext)s"
+
+# Run yt-dlp
+echo "Starting download..."
+yt-dlp "${YTDL_ARGS[@]}" -o "$OUTPUT_TEMPLATE" "$URL"
+
+echo "Done!"
